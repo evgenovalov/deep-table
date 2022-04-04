@@ -18,55 +18,57 @@ interface IFlatRow {
   shiftStyles?: string
 }
 
+// flat reactive array based on `table.rows`
 const displayedRows = computed(() => {
   const flattenedRows: IFlatRow[] = []
-
-  function flattenize(rows: IRow[], flattenRows: IRow[], depth = 0) {
-    rows.forEach((row: IRow) => {
-      const newRow: IFlatRow = {
-        data: {},
-        origin: row,
-        depth,
-        expandable: !!row.subrows?.length
-      }
-
-      // pass data and aggregate groups
-      props.config.headers.forEach((header) => {
-        if (row.data[header.key]) {
-          newRow.data[header.key] = row.data[header.key]
-        } else if (header.aggregator && row.subrows && row.subrows.length > 0) {
-          newRow.data[header.key] = header.aggregator(row.subrows, header.key)
-        }
-      })
-
-      function computeShiftStyles(flatRow: IFlatRow) {
-        const shift = flatRow.depth as number
-        const paddingLeft = shift * 20 + 20
-        return `padding-left: ${paddingLeft}px`
-      }
-
-      newRow.origin = row
-      newRow.shiftStyles = computeShiftStyles(newRow)
-      flattenRows.push(newRow)
-
-      if (row.opened && row.subrows && row.subrows.length > 0) {
-        const newDepth = depth + 1
-        flattenize(row.subrows, flattenRows, newDepth)
-      }
-    })
-  }
-
   flattenize(table.rows, flattenedRows)
   return flattenedRows
 })
 
+// compute styles for <td> shifting
+const computeShiftStyles = (flatRow: IFlatRow) => {
+  const shift = flatRow.depth as number
+  const paddingLeft = shift * 20 + 20
+  return `padding-left: ${paddingLeft}px`
+}
+
+// recursively pulls out all nested rows from open rows
+const flattenize = (rows: IRow[], flattenRows: IRow[], depth = 0) => {
+  rows.forEach((row: IRow) => {
+    const newRow: IFlatRow = {
+      data: {},
+      origin: row,
+      depth,
+      expandable: !!row.subrows?.length
+    }
+
+    // pass data and aggregate groups
+    props.config.headers.forEach((header) => {
+      if (row.data[header.key]) {
+        newRow.data[header.key] = row.data[header.key]
+      } else if (header.aggregator && row.subrows && row.subrows.length > 0) {
+        newRow.data[header.key] = header.aggregator(row.subrows, header.key)
+      }
+    })
+
+    newRow.origin = row
+    newRow.shiftStyles = computeShiftStyles(newRow)
+    flattenRows.push(newRow)
+
+    if (row.opened && row.subrows && row.subrows.length > 0) {
+      const newDepth = depth + 1
+      flattenize(row.subrows, flattenRows, newDepth)
+    }
+  })
+}
+
 // changes the data in origin object by user input
-function changeData(node: IRow, key: string, value: string) {
+const changeData = (node: IRow, key: string, value: string) => {
   node.data[key] = value
 }
 
 // apply changes by enter keydown
-function applyChanges(node: IRow, key: string, event: Event) {
+const applyChanges = (node: IRow, key: string, event: Event) => {
   event.preventDefault()
   const target = event.target as HTMLTableCellElement
   target.blur()
