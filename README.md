@@ -23,18 +23,18 @@ To create a reusable table component
 
 ## Decisions
 
+### Incoming structure
+
+1. First, I tried to describe a possible data structure that we can potentially get from the API.
+2. It was decided to make a factory function that can accept any raw data as an array of objects (src/utils.ts)
+3. Each of the objects can have a key with an array of nested data. We can pass this key to the factory function for
+   data parsing.
+
 ### Data types
 
 All types are declared in `types/table`.
 
 You can use the `ITable` type to pass `config` props to the `<AppTable />` component
-
-### Incoming structure
-
-1. First, I tried to describe a possible data structure that we can potentially get from the API.
-2. It was decided to make a factory function that can accept any raw data as an array of objects (src/utils/)
-3. Each of the objects can have a key with an array of nested data. We can pass this key to the factory function for
-   data parsing.
 
 ### Nesting
 
