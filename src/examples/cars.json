@@ -1,0 +1,82 @@
+[
+  {
+    "vehicleName": "Motorcycles (avg)",
+    "subrows": [
+      {
+        "vehicleName": "Yamaha R1",
+        "subrows": [
+          {
+            "vehicleName": "R1-2018",
+            "power": 186.4,
+            "torque": 200
+          },
+          {
+            "vehicleName": "R1-2020",
+            "power": 193.1,
+            "torque": 220
+          },
+          {
+            "vehicleName": "R1-2022",
+            "power": 205.8,
+            "torque": 224
+          }
+        ]
+      },
+      {
+        "vehicleName": "BMW S1000RR",
+        "power": 190.4,
+        "torque": 214
+      },
+      {
+        "vehicleName": "Kawasaki ZX-14R",
+        "power": 207.9,
+        "torque": 243
+      }
+    ]
+  },
+  {
+    "vehicleName": "Cars (avg)",
+    "subrows": [
+      {
+        "vehicleName": "Dodge Demon",
+        "power": 840,
+        "torque": 402
+      },
+      {
+        "vehicleName": "Rimac Concept S",
+        "power": 1384,
+        "torque": 561
+      },
+      {
+        "vehicleName": "Bugatti Chiron",
+        "power": 1479,
+        "torque": 642
+      }
+    ]
+  },
+  {
+    "vehicleName": "Pickups (avg)",
+    "subrows": [
+      {
+        "vehicleName": "Chevrolet Silverado",
+        "power": 800,
+        "torque": 482
+      },
+      {
+        "vehicleName": "Shelby Ford F-150 Super Snake",
+        "power": 720,
+        "torque": 509
+      },
+      {
+        "vehicleName": "Hennessey Ram 1500 TRX Mammoth",
+        "power": 207.9,
+        "torque": 240
+      }
+    ]
+  },
+  {
+    "vehicleName": "Honda Giorno",
+    "power": 5.6,
+    "torque": 10
+  }
+]
